@@ -22,5 +22,9 @@ public class App2 {
         System.out.println("\n---- Test 03: Department delete ----");
         departmentDao.deleteById(6);
         System.out.println("Done! department deleted");
+
+        System.out.println("\n---- Test 04: Department findById ----");
+        dep = departmentDao.findById(1);
+        System.out.println(dep);
     }
 }
