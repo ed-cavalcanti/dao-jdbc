@@ -18,5 +18,9 @@ public class App2 {
         Department updateDepartment = new Department(4, "Internet");
         departmentDao.update(updateDepartment);
         System.out.println("Done! department updated");
+
+        System.out.println("\n---- Test 03: Department delete ----");
+        departmentDao.deleteById(6);
+        System.out.println("Done! department deleted");
     }
 }
