@@ -13,5 +13,10 @@ public class App2 {
         dep.setName("Home");
         departmentDao.insert(dep);
         System.out.println("Done! new department id: " + dep.getId());
+
+        System.out.println("\n---- Test 02: Department update ----");
+        Department updateDepartment = new Department(4, "Internet");
+        departmentDao.update(updateDepartment);
+        System.out.println("Done! department updated");
     }
 }
