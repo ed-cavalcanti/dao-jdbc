@@ -30,11 +30,10 @@ public class SellerDaoJDBC implements SellerDao {
 
         try {
             st = connection.prepareStatement(
-                "INSERT INTO seller "
-                + "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
-                + "VALUES (?, ?, ?, ?, ?)",
-                Statement.RETURN_GENERATED_KEYS
-            );
+                    "INSERT INTO seller "
+                            + "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
+                            + "VALUES (?, ?, ?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
 
             st.setString(1, obj.getName());
             st.setString(2, obj.getName());
@@ -64,8 +63,29 @@ public class SellerDaoJDBC implements SellerDao {
 
     @Override
     public void update(Seller obj) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        PreparedStatement st = null;
+
+        try {
+            st = connection.prepareStatement(
+                    "UPDATE seller "
+                            + "SET Name = ?, Email = ?, BirthDate = ?, "
+                            + "BaseSalary = ?, DepartmentId = ? "
+                            + "WHERE Id = ?");
+
+            st.setString(1, obj.getName());
+            st.setString(2, obj.getName());
+            st.setDate(3, new java.sql.Date(obj.getBirthDate().getTime()));
+            st.setDouble(4, obj.getBaseSalary());
+            st.setInt(5, obj.getDepartment().getId());
+
+            st.setInt(6, obj.getId());
+
+            st.executeUpdate();
+        } catch (SQLException error) {
+            throw new DbException(error.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override
